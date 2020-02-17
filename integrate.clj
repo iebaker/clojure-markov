@@ -6,16 +6,16 @@
     (let [sample-points (for [x (range num-samples)] (rand-between lower-bound upper-bound))]
         (map f sample-points)))
 
-(defn average [vector]
+(defn average-vector-value [vector]
     (if (empty? vector)
         0
         (/ (reduce + vector) (count vector))))
 
-(defn average-value [f lower-bound upper-bound]
+(defn average-function-value [f lower-bound upper-bound]
     (let [samples (sample-function f 100000 lower-bound upper-bound)]
-        (average samples)))
+        (average-vector-value samples)))
 
 (defn integrate [f lower-bound upper-bound]
-    (/ (average-value f lower-bound upper-bound) (- upper-bound lower-bound)))
+    (/ (average-function-value f lower-bound upper-bound) (- upper-bound lower-bound)))
 
 (println (integrate #(Math/sin %) 0 (Math/PI)))
